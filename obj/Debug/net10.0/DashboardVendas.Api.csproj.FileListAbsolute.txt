@@ -1,0 +1,8 @@
+C:\Users\anabe\Documents\dashboard-vendas\backend\DashboardVendas.Api\obj\Debug\net10.0\DashboardVendas.Api.csproj.AssemblyReference.cache
+C:\Users\anabe\Documents\dashboard-vendas\backend\DashboardVendas.Api\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\anabe\Documents\dashboard-vendas\backend\DashboardVendas.Api\obj\Debug\net10.0\DashboardVendas.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\anabe\Documents\dashboard-vendas\backend\DashboardVendas.Api\obj\Debug\net10.0\DashboardVendas.Api.AssemblyInfoInputs.cache
+C:\Users\anabe\Documents\dashboard-vendas\backend\DashboardVendas.Api\obj\Debug\net10.0\DashboardVendas.Api.AssemblyInfo.cs
+C:\Users\anabe\Documents\dashboard-vendas\backend\DashboardVendas.Api\obj\Debug\net10.0\DashboardVendas.Api.csproj.CoreCompileInputs.cache
+C:\Users\anabe\Documents\dashboard-vendas\backend\DashboardVendas.Api\obj\Debug\net10.0\DashboardVendas.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\anabe\Documents\dashboard-vendas\backend\DashboardVendas.Api\obj\Debug\net10.0\DashboardVendas.Api.MvcApplicationPartsAssemblyInfo.cache
