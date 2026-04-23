@@ -11,7 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://*:{port}");
-
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -27,9 +26,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("frontend", policy =>
     {
-        policy.WithOrigins("http://localhost:5173")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
     });
 });
 
@@ -103,3 +102,11 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
