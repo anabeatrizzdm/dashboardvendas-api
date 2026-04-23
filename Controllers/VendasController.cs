@@ -27,9 +27,26 @@ public class VendasController : ControllerBase
             .Include(v => v.Itens)
                 .ThenInclude(i => i.Produto)
             .OrderByDescending(v => v.DataVenda)
+            .AsNoTracking()
             .ToListAsync();
 
         return Ok(vendas);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult> GetById(int id)
+    {
+        var venda = await _context.Vendas
+            .Include(v => v.Cliente)
+            .Include(v => v.Itens)
+                .ThenInclude(i => i.Produto)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(v => v.Id == id);
+
+        if (venda == null)
+            return NotFound(new { message = "Venda não encontrada." });
+
+        return Ok(venda);
     }
 
     [HttpPost]
@@ -45,7 +62,8 @@ public class VendasController : ControllerBase
         var venda = new Venda
         {
             ClienteId = dto.ClienteId,
-            DataVenda = DateTime.UtcNow
+            DataVenda = DateTime.UtcNow,
+            Itens = new List<ItemVenda>()
         };
 
         decimal total = 0;
@@ -53,6 +71,7 @@ public class VendasController : ControllerBase
         foreach (var itemDto in dto.Itens)
         {
             var produto = await _context.Produtos.FindAsync(itemDto.ProdutoId);
+
             if (produto == null)
                 return BadRequest(new { message = $"Produto {itemDto.ProdutoId} não encontrado." });
 
@@ -81,6 +100,10 @@ public class VendasController : ControllerBase
         _context.Vendas.Add(venda);
         await _context.SaveChangesAsync();
 
-        return Ok(new { message = "Venda cadastrada com sucesso.", vendaId = venda.Id });
+        return Ok(new
+        {
+            message = "Venda cadastrada com sucesso.",
+            vendaId = venda.Id
+        });
     }
 }

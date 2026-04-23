@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.Json.Serialization;
 using DashboardVendas.Api.Data;
 using DashboardVendas.Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,7 +15,11 @@ if (!string.IsNullOrEmpty(port))
     builder.WebHost.UseUrls($"http://*:{port}");
 }
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
